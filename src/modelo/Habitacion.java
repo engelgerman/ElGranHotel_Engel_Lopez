@@ -4,7 +4,7 @@ package modelo;
 
 public class Habitacion {
 
-    private int numeroHabitacion, piso, estadoHabitacion;
+    private int numeroHabitacion, piso, estadoHabitacion, codigoHabitacion;
     private TipoHabitacion tipoHabitacion;
     
 //Constructor
@@ -17,12 +17,14 @@ public class Habitacion {
         this.numeroHabitacion = numeroHabitacion;
         this.piso = piso;
         this.tipoHabitacion = tipoHabitacion;
+        this.codigoHabitacion = tipoHabitacion.getCodigoHabitacion();
         this.estadoHabitacion = estadoHabitacion;
     }
     
     public Habitacion(int piso, TipoHabitacion tipoHabitacion, int estadoHabitacion){
         this.piso = piso;
         this.tipoHabitacion = tipoHabitacion;
+        this.codigoHabitacion = tipoHabitacion.getCodigoHabitacion();
         this.estadoHabitacion = estadoHabitacion;
     }
     
@@ -38,6 +40,11 @@ public class Habitacion {
     
     public void setTipoHabitacion(TipoHabitacion tipohabitacion){
         this.tipoHabitacion = tipohabitacion;
+        this.codigoHabitacion = tipoHabitacion.getCodigoHabitacion();
+    }
+    
+    public void setTipoHabitacion(int codigoHabitacion){
+        this.codigoHabitacion = codigoHabitacion;
     }
     
     public void setEstadoHabitacion(int estadoHabitacion){
@@ -54,8 +61,8 @@ public class Habitacion {
         return piso;
     }
     
-    public TipoHabitacion getTipoHabitacion(){
-        return tipoHabitacion;
+    public int getTipoHabitacion(){
+        return codigoHabitacion;
     }
     
     public int getEstadoHabitacion(){

@@ -6,7 +6,7 @@ package modelo;
     
 public class Reservas {
     
-    int numeroReserva, cantidadDias, estadoReserva;
+    int numeroReserva, cantidadDias, estadoReserva, numeroHabitacion, idHuesped;
     LocalDate fechaEntrada, fechaSalida;
     double importe;
     Habitacion habitacion;
@@ -26,7 +26,9 @@ public class Reservas {
         this.importe = importe;
         this.estadoReserva = estadoReserva;
         this.habitacion = habitacion;
+        this.numeroHabitacion = habitacion.getNumeroHabitacion();
         this.huesped = huesped;
+        this.idHuesped = huesped.getIdHuesped();
     }
     
     public Reservas(int cantidadDias, LocalDate fechaEntrada, LocalDate fechaSalida, double importe, int estadoReserva, Habitacion habitacion, Huesped huesped){
@@ -36,7 +38,20 @@ public class Reservas {
         this.importe = importe;
         this.estadoReserva = estadoReserva;
         this.habitacion = habitacion;
+        this.numeroHabitacion = habitacion.getNumeroHabitacion();
         this.huesped = huesped;
+        this.idHuesped = huesped.getIdHuesped();
+    }
+    
+    public Reservas(int numeroReserva, int cantidadDias, LocalDate fechaEntrada, LocalDate fechaSalida, double importe, int estadoReserva, int numeroHabitacion, int idHuesped){
+        this.numeroReserva = numeroReserva;
+        this.cantidadDias = cantidadDias;
+        this.fechaEntrada = fechaEntrada;
+        this.fechaSalida = fechaSalida;
+        this.importe = importe;
+        this.estadoReserva = estadoReserva;
+        this.numeroHabitacion = numeroHabitacion;
+        this.idHuesped = idHuesped;
     }
 
 //Set
@@ -67,10 +82,20 @@ public class Reservas {
     
     public void setHabitacion(Habitacion habitacion){
         this.habitacion = habitacion;
+        this.numeroHabitacion = habitacion.getNumeroHabitacion();
+    }
+    
+    public void setHabitacion(int numeroHabitacion){
+        this.numeroHabitacion = numeroHabitacion;
     }
     
     public void setHuesped(Huesped huesped){
         this.huesped = huesped;
+        this.idHuesped = huesped.getIdHuesped();
+    }
+
+    public void setHuesped(int idHuesped){
+        this.idHuesped = idHuesped;
     }
     
 //Get
@@ -99,12 +124,12 @@ public class Reservas {
         return estadoReserva;
     }
     
-    public Habitacion getHabitacion(){
-        return habitacion;
+    public int getHabitacion(){
+        return numeroHabitacion;
     }
     
-    public Huesped getHuesped(){
-        return huesped;
+    public int getHuesped(){
+        return idHuesped;
     }
     
 }

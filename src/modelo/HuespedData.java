@@ -23,12 +23,12 @@ public class HuespedData {
 
     }
     
-//Alta Huesped
+//Alta
     
     public void agregarHuesped(Huesped huesped){
              
         try{
-            String sql = "INSERT INTO HUESPED (NOMBRE, DNI, DOMICILIO, CORREO, CELULAR) VALUES (?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO huesped (NOMBRE, DNI, DOMICILIO, CORREO, CELULAR) VALUES (?, ?, ?, ?, ?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, huesped.getNombre());
             ps.setInt(2, huesped.getDni());
@@ -54,11 +54,11 @@ public class HuespedData {
         }
     }
     
-//Baja Huesped
+//Baja
     
     public void borrarHuesped(int idHuesped){
         try {
-            String sql = "DELETE FROM HUESPED WHERE IDHUEPED = ?";
+            String sql = "DELETE FROM huesped WHERE IDHUEPED = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idHuesped);
             ps.executeUpdate();
@@ -70,11 +70,11 @@ public class HuespedData {
             
     }
 
-//Modificacion  Huesped
+//Modificacion
     
     public void modificarHuesped(Huesped huesped){
         try {
-            String sql = "UPDATE HUESPED SET NOMBRE = ?, DNI = ?, DOMICILIO = ?, CORREO = ?, CELULAR = ? WHERE IDHUESPED = ?";
+            String sql = "UPDATE huesped SET NOMBRE = ?, DNI = ?, DOMICILIO = ?, CORREO = ?, CELULAR = ? WHERE IDHUESPED = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, huesped.getNombre());
@@ -94,13 +94,13 @@ public class HuespedData {
            
     }
     
-//Buscar Huesped
+//Buscar
     
     public Huesped buscarHuesped(int idHuesped){
         Huesped huesped = null;
         
         try {
-            String sql = "SELECT * FROM IDHUESPED WHERE IDHUESPED = ?";
+            String sql = "SELECT * FROM huesped WHERE IDHUESPED = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idHuesped);
             ResultSet rs = ps.executeQuery();
@@ -124,14 +124,14 @@ public class HuespedData {
         
     }
     
-//Listar Huesped
+//Listar
     
     public List<Huesped> listarHuesped(){
         List<Huesped> huespedes = new ArrayList<Huesped>();
         
         try{
             
-        String sql = "SELECT * FROM HUESPED";
+        String sql = "SELECT * FROM huesped";
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         
