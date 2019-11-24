@@ -1,16 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package modelo;
 
     import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author Engel
- */
 public class Conexion {
  
     private final String url = "jdbc:mysql://localhost:3306/elgranhotel";
@@ -18,17 +12,31 @@ public class Conexion {
     private final String pass = "";
     private Connection con;
     
-    public Connection getConnection (){
+    public Connection getConexion () {
      try{
+
+         try {
+             Class.forName("com.mysql.jdbc.Driver");
+         } catch (ClassNotFoundException ex) {
+             System.out.println("Error driver coneccion");
+         }
+
+        
         con = DriverManager.getConnection(url, user, pass);
         System.out.println("Conexion exitosa!!!");
         
      }
      catch(SQLException e){
-        System.out.println(e);
+        System.out.println("Error de coneccion");
     }
      
      return con;
     }
+
+    PreparedStatement prepareStatement(String sql, int RETURN_GENERATED_KEYS) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
     
 }

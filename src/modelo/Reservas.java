@@ -1,12 +1,13 @@
 
 package modelo;
 
-    import java.util.Date;
+    import java.time.LocalDate;
+
     
 public class Reservas {
     
     int numeroReserva, cantidadDias, estadoReserva;
-    Date fechaEntrada, fechaSalida;
+    LocalDate fechaEntrada, fechaSalida;
     double importe;
     Habitacion habitacion;
     Huesped huesped;
@@ -17,7 +18,18 @@ public class Reservas {
         
     }
     
-    public Reservas(int cantidadDias, Date fechaEntrada, Date fechaSalida, double importe, int estadoReserva, Habitacion habitacion, Huesped huesped){
+    public Reservas(int numeroReserva, int cantidadDias, LocalDate fechaEntrada, LocalDate fechaSalida, double importe, int estadoReserva, Habitacion habitacion, Huesped huesped){
+        this.numeroReserva = numeroReserva;
+        this.cantidadDias = cantidadDias;
+        this.fechaEntrada = fechaEntrada;
+        this.fechaSalida = fechaSalida;
+        this.importe = importe;
+        this.estadoReserva = estadoReserva;
+        this.habitacion = habitacion;
+        this.huesped = huesped;
+    }
+    
+    public Reservas(int cantidadDias, LocalDate fechaEntrada, LocalDate fechaSalida, double importe, int estadoReserva, Habitacion habitacion, Huesped huesped){
         this.cantidadDias = cantidadDias;
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
@@ -37,11 +49,11 @@ public class Reservas {
         this.cantidadDias = cantidadDias;
     }
     
-    public void setFechaEntrada(Date fechaEntrada){
+    public void setFechaEntrada(LocalDate fechaEntrada){
         this.fechaEntrada = fechaEntrada;
     }
     
-    public void setFechaSalida(Date fechaSalida){
+    public void setFechaSalida(LocalDate fechaSalida){
         this.fechaSalida = fechaSalida;
     }
     
@@ -71,11 +83,11 @@ public class Reservas {
         return cantidadDias;
     }
     
-    public Date getFechaEntrada(){
+    public LocalDate getFechaEntrada(){
         return fechaEntrada;
     }
     
-    public Date getFechaSalida(){
+    public LocalDate getFechaSalida(){
         return fechaSalida;
     }
     

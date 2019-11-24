@@ -4,8 +4,8 @@ package modelo;
 
 public class Huesped {
     
-    private String nombre, domicilio, correo;
-    private int idHuesped, dni, celular;
+    private String nombre, domicilio, correo, celular;
+    private int idHuesped, dni;
     
 //Constructor
 
@@ -13,7 +13,16 @@ public class Huesped {
         
     }
     
-    public Huesped(String nombre, int dni, String domicilio, String correo, int celular){
+    public Huesped(int idHuesped, String nombre, int dni, String domicilio, String correo, String celular){
+        this.idHuesped = idHuesped;
+        this.nombre = nombre;
+        this.dni = dni;
+        this.domicilio = domicilio;
+        this.correo = correo;
+        this.celular = celular;
+    }
+    
+    public Huesped(String nombre, int dni, String domicilio, String correo, String celular){
         this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;
@@ -43,7 +52,7 @@ public class Huesped {
         this.correo = correo;
     }
     
-    public void setCelular(int celular){
+    public void setCelular(String celular){
         this.celular = celular;
     }
     
@@ -69,7 +78,7 @@ public class Huesped {
         return correo;
     }
     
-    public int getCelular(){
+    public String getCelular(){
         return celular;
     }
     

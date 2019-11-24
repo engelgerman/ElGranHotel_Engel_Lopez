@@ -13,6 +13,13 @@ public class Habitacion {
         
     }   
     
+    public Habitacion(int numeroHabitacion, int piso, TipoHabitacion tipoHabitacion, int estadoHabitacion){
+        this.numeroHabitacion = numeroHabitacion;
+        this.piso = piso;
+        this.tipoHabitacion = tipoHabitacion;
+        this.estadoHabitacion = estadoHabitacion;
+    }
+    
     public Habitacion(int piso, TipoHabitacion tipoHabitacion, int estadoHabitacion){
         this.piso = piso;
         this.tipoHabitacion = tipoHabitacion;
