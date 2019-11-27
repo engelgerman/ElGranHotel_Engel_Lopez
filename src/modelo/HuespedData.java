@@ -58,7 +58,7 @@ public class HuespedData {
     
     public void borrarHuesped(int idHuesped){
         try {
-            String sql = "DELETE FROM huesped WHERE IDHUEPED = ?";
+            String sql = "DELETE FROM huesped WHERE IDHUESPED = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idHuesped);
             ps.executeUpdate();
