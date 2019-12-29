@@ -4,6 +4,7 @@ package vista;
 import modelo.Conexion;
 import modelo.Huesped;
 import modelo.HuespedData;
+import static vista.Principal.jdpPrincipal;
 
 public class HuespedAdministrar extends javax.swing.JInternalFrame {
 
@@ -12,6 +13,7 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
         initComponents();
         Conexion con = new Conexion();
         hd = new HuespedData(con);
+
     }
 
 
@@ -54,6 +56,8 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
         jLabel5.setText("Celular");
 
         jLabel6.setText("ID");
+
+        jtfID.setEditable(false);
 
         jbModificar.setText("Modificar");
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -172,6 +176,7 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
     HuespedData hd;
     Huesped huesped;
+    boolean block = true;
     
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         //Limpiar
@@ -181,6 +186,7 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
         jtfDomicilio.setText("");
         jtfCorreo.setText("");
         jtfCelular.setText("");
+        block = true;
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
@@ -200,16 +206,22 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
 
     private void jbCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCrearActionPerformed
         //Crear
-        huesped = new Huesped();
-        huesped.setNombre(jtfNombre.getText());
-        huesped.setDni(Integer.parseInt(jtfDNI.getText()));
-        huesped.setDomicilio(jtfDomicilio.getText());
-        huesped.setCorreo(jtfCorreo.getText());
-        huesped.setCelular(jtfCelular.getText());
+        if(block){
+            Validaciones valid = new Validaciones();
+            if(valid.esDNI(jtfDNI.getText())){
+            huesped = new Huesped();
+            huesped.setNombre(jtfNombre.getText());
+            huesped.setDni(Integer.parseInt(jtfDNI.getText()));
+            huesped.setDomicilio(jtfDomicilio.getText());
+            huesped.setCorreo(jtfCorreo.getText());
+            huesped.setCelular(jtfCelular.getText());
         
-        hd.agregarHuesped(huesped);
+            hd.agregarHuesped(huesped);
 
-        jtfID.setText(huesped.getIdHuesped()+"");
+            jtfID.setText(huesped.getIdHuesped()+"");
+            }
+            block = false;
+        }    
     }//GEN-LAST:event_jbCrearActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
@@ -228,14 +240,12 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         //Buscar
-        huesped = new Huesped();
-        huesped = hd.buscarHuesped(Integer.parseInt(jtfID.getText()));
+        if(Principal.buscarHuesped == null){
+            Principal.buscarHuesped = new HuespedBuscar();
+        }
+        jdpPrincipal.add(Principal.buscarHuesped);
+        Principal.buscarHuesped.setVisible(true);
         
-        jtfNombre.setText(huesped.getNombre());
-        jtfDNI.setText(huesped.getDni()+"");
-        jtfDomicilio.setText(huesped.getDomicilio());
-        jtfCorreo.setText(huesped.getCorreo());
-        jtfCelular.setText(huesped.getCelular());
     }//GEN-LAST:event_jbBuscarActionPerformed
 
 
@@ -251,11 +261,11 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbCrear;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbModificar;
-    private javax.swing.JTextField jtfCelular;
-    private javax.swing.JTextField jtfCorreo;
-    private javax.swing.JTextField jtfDNI;
-    private javax.swing.JTextField jtfDomicilio;
-    private javax.swing.JTextField jtfID;
-    private javax.swing.JTextField jtfNombre;
+    public javax.swing.JTextField jtfCelular;
+    public javax.swing.JTextField jtfCorreo;
+    public javax.swing.JTextField jtfDNI;
+    public javax.swing.JTextField jtfDomicilio;
+    public javax.swing.JTextField jtfID;
+    public javax.swing.JTextField jtfNombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,9 +6,8 @@ package modelo;
     
 public class Reservas {
     
-    int numeroReserva, cantidadDias, estadoReserva, numeroHabitacion, idHuesped;
+    int numeroReserva, cantidadPersonas, cantidadDias, estadoReserva;
     LocalDate fechaEntrada, fechaSalida;
-    double importe;
     Habitacion habitacion;
     Huesped huesped;
 
@@ -18,46 +17,35 @@ public class Reservas {
         
     }
     
-    public Reservas(int numeroReserva, int cantidadDias, LocalDate fechaEntrada, LocalDate fechaSalida, double importe, int estadoReserva, Habitacion habitacion, Huesped huesped){
+    public Reservas(int numeroReserva,int cantidadPersonas, int cantidadDias, LocalDate fechaEntrada, LocalDate fechaSalida, int estadoReserva, Habitacion habitacion, Huesped huesped){
         this.numeroReserva = numeroReserva;
+        this.cantidadPersonas = cantidadPersonas;
         this.cantidadDias = cantidadDias;
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
-        this.importe = importe;
         this.estadoReserva = estadoReserva;
         this.habitacion = habitacion;
-        this.numeroHabitacion = habitacion.getNumeroHabitacion();
         this.huesped = huesped;
-        this.idHuesped = huesped.getIdHuesped();
     }
     
-    public Reservas(int cantidadDias, LocalDate fechaEntrada, LocalDate fechaSalida, double importe, int estadoReserva, Habitacion habitacion, Huesped huesped){
+    public Reservas(int cantidadPersonas, int cantidadDias, LocalDate fechaEntrada, LocalDate fechaSalida, int estadoReserva, Habitacion habitacion, Huesped huesped){
+        this.cantidadPersonas = cantidadPersonas;
         this.cantidadDias = cantidadDias;
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
-        this.importe = importe;
         this.estadoReserva = estadoReserva;
         this.habitacion = habitacion;
-        this.numeroHabitacion = habitacion.getNumeroHabitacion();
         this.huesped = huesped;
-        this.idHuesped = huesped.getIdHuesped();
-    }
+     }
     
-    public Reservas(int numeroReserva, int cantidadDias, LocalDate fechaEntrada, LocalDate fechaSalida, double importe, int estadoReserva, int numeroHabitacion, int idHuesped){
-        this.numeroReserva = numeroReserva;
-        this.cantidadDias = cantidadDias;
-        this.fechaEntrada = fechaEntrada;
-        this.fechaSalida = fechaSalida;
-        this.importe = importe;
-        this.estadoReserva = estadoReserva;
-        this.numeroHabitacion = numeroHabitacion;
-        this.idHuesped = idHuesped;
-    }
-
 //Set
     
     public void setNumeroReserva(int numeroReserva){
         this.numeroReserva = numeroReserva;
+    }
+    
+    public void setCantidadPersonas(int cantidadPersonas){
+        this.cantidadPersonas = cantidadPersonas;
     }
     
     public void setCantidadDias(int cantidadDias){
@@ -72,36 +60,26 @@ public class Reservas {
         this.fechaSalida = fechaSalida;
     }
     
-    public void setImporte(double importe){
-        this.importe = importe;
-    }
-    
     public void setEstadoReserva(int estadoReserva){
         this.estadoReserva = estadoReserva;
     }
     
     public void setHabitacion(Habitacion habitacion){
         this.habitacion = habitacion;
-        this.numeroHabitacion = habitacion.getNumeroHabitacion();
-    }
-    
-    public void setHabitacion(int numeroHabitacion){
-        this.numeroHabitacion = numeroHabitacion;
     }
     
     public void setHuesped(Huesped huesped){
         this.huesped = huesped;
-        this.idHuesped = huesped.getIdHuesped();
     }
 
-    public void setHuesped(int idHuesped){
-        this.idHuesped = idHuesped;
-    }
-    
 //Get
     
     public int getNumeroReserva(){
         return numeroReserva;
+    }
+    
+    public int getCantidadPersonas(){
+        return cantidadPersonas;
     }
     
     public int getCantidadDias(){
@@ -116,20 +94,16 @@ public class Reservas {
         return fechaSalida;
     }
     
-    public double getImporte(){
-        return importe;
-    }
-    
     public int getEstadoReserva(){
         return estadoReserva;
     }
     
-    public int getHabitacion(){
-        return numeroHabitacion;
+    public Habitacion getHabitacion(){
+        return habitacion;
     }
     
-    public int getHuesped(){
-        return idHuesped;
+    public Huesped getHuesped(){
+        return huesped;
     }
     
 }

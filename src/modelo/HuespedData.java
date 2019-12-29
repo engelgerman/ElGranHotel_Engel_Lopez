@@ -8,6 +8,7 @@ package modelo;
     import java.sql.Statement;
     import java.util.ArrayList;
     import java.util.List;
+import javax.swing.JOptionPane;
 
 
 
@@ -44,6 +45,7 @@ public class HuespedData {
                 huesped.setIdHuesped(rs.getInt(1));
             } else {
                 System.out.println("No se pudo obtener el id del huesped");
+                JOptionPane.showMessageDialog(null, "No se pudo optener el ID", "Huesped", JOptionPane.WARNING_MESSAGE);
             }
             
             ps.close();
@@ -51,6 +53,7 @@ public class HuespedData {
         }
         catch(SQLException ex){
             System.out.println("Error al agregar Huesped");
+            JOptionPane.showMessageDialog(null, "Error al agregar", "Huesped", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -66,6 +69,7 @@ public class HuespedData {
                            
         } catch (SQLException ex) {
             System.out.println("Error al borrar huesped");
+
         }
             
     }
@@ -94,9 +98,9 @@ public class HuespedData {
            
     }
     
-//Buscar
+//Buscar ID
     
-    public Huesped buscarHuesped(int idHuesped){
+    public Huesped buscarHuespedID(int idHuesped){
         Huesped huesped = null;
         
         try {
@@ -118,6 +122,73 @@ public class HuespedData {
             
         } catch (SQLException ex) {
             System.out.println("Error al buscar huesped");
+            JOptionPane.showMessageDialog(null, "No se encontro ningun huesped", "Buscar Huesped", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        return huesped;
+        
+    }
+    
+//Buscar Nombre
+    
+    public List<Huesped> buscarHuespedNombre(String nombre){
+        List<Huesped> huespedes = new ArrayList<Huesped>();
+        
+        try {
+            String sql = "SELECT * FROM huesped WHERE NOMBRE LIKE ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, "%"+nombre+"%");
+            ResultSet rs = ps.executeQuery();
+            
+            Huesped huesped;
+            
+            while (rs.next()){
+                huesped = new Huesped();
+                huesped.setIdHuesped(rs.getInt(1));
+                huesped.setNombre(rs.getString(2));
+                huesped.setDni(rs.getInt(3));
+                huesped.setDomicilio(rs.getString(4));
+                huesped.setCorreo(rs.getString(5));
+                huesped.setCelular(rs.getString(6));
+                
+                huespedes.add(huesped);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar huesped");
+            JOptionPane.showMessageDialog(null, "No se encontro ningun huesped", "Buscar Huesped", JOptionPane.WARNING_MESSAGE);            
+        }
+        
+        return huespedes;
+        
+    }  
+    
+//Buscar DNI
+    
+        public Huesped buscarHuespedDNI(int dni){
+        Huesped huesped = null;
+        
+        try {
+            String sql = "SELECT * FROM huesped WHERE DNI = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, dni);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                huesped = new Huesped();
+                huesped.setIdHuesped(rs.getInt(1));
+                huesped.setNombre(rs.getString(2));
+                huesped.setDni(rs.getInt(3));
+                huesped.setDomicilio(rs.getString(4));
+                huesped.setCorreo(rs.getString(5));
+                huesped.setCelular(rs.getString(6));
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar huesped");
+            JOptionPane.showMessageDialog(null, "No se encontro ningun huesped", "Buscar Huesped", JOptionPane.WARNING_MESSAGE);
         }
         
         return huesped;

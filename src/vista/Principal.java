@@ -3,14 +3,15 @@ package vista;
 
 import java.awt.Component;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
 
 
 public class Principal extends javax.swing.JFrame {
 
+
     public Principal() {
         initComponents();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -22,11 +23,11 @@ public class Principal extends javax.swing.JFrame {
         jmiSalir = new javax.swing.JMenuItem();
         jmHuesped = new javax.swing.JMenu();
         jmiAdministrarHuesped = new javax.swing.JMenuItem();
-        jmiHuespedListar = new javax.swing.JMenuItem();
-        jmHabitacion = new javax.swing.JMenu();
+        jmiHuespedBuscar = new javax.swing.JMenuItem();
         jmTipoHabitacion = new javax.swing.JMenu();
         jmiAdministrarTH = new javax.swing.JMenuItem();
         jmiTHListar = new javax.swing.JMenuItem();
+        jmHabitacion = new javax.swing.JMenu();
         jmiAdministrarHabitacion = new javax.swing.JMenuItem();
         jmiHabitacionListar = new javax.swing.JMenuItem();
         jmReservas = new javax.swing.JMenu();
@@ -63,17 +64,15 @@ public class Principal extends javax.swing.JFrame {
         });
         jmHuesped.add(jmiAdministrarHuesped);
 
-        jmiHuespedListar.setText("Listar");
-        jmiHuespedListar.addActionListener(new java.awt.event.ActionListener() {
+        jmiHuespedBuscar.setText("Buscar");
+        jmiHuespedBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiHuespedListarActionPerformed(evt);
+                jmiHuespedBuscarActionPerformed(evt);
             }
         });
-        jmHuesped.add(jmiHuespedListar);
+        jmHuesped.add(jmiHuespedBuscar);
 
         jMenuBar2.add(jmHuesped);
-
-        jmHabitacion.setText("Habitacion");
 
         jmTipoHabitacion.setText("Tipo de Habitacion");
 
@@ -93,7 +92,9 @@ public class Principal extends javax.swing.JFrame {
         });
         jmTipoHabitacion.add(jmiTHListar);
 
-        jmHabitacion.add(jmTipoHabitacion);
+        jMenuBar2.add(jmTipoHabitacion);
+
+        jmHabitacion.setText("Habitacion");
 
         jmiAdministrarHabitacion.setText("Administrar");
         jmiAdministrarHabitacion.addActionListener(new java.awt.event.ActionListener() {
@@ -140,19 +141,36 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public static HuespedAdministrar adminHuesped = null;
+    public static HuespedBuscar buscarHuesped = null;
+    
     private void jmiAdministrarHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAdministrarHuespedActionPerformed
         //Llamar a administrar huesped
-        HuespedAdministrar ha = new HuespedAdministrar();
-        jdpPrincipal.add(ha);
-        ha.setVisible(true);            
+        if(adminHuesped == null){
+            adminHuesped = new HuespedAdministrar();
+            jdpPrincipal.add(adminHuesped);
+            adminHuesped.show();
+        }else{
+            adminHuesped.dispose();
+            adminHuesped = new HuespedAdministrar();
+            jdpPrincipal.add(adminHuesped);
+            adminHuesped.show();
+        }       
     }//GEN-LAST:event_jmiAdministrarHuespedActionPerformed
 
-    private void jmiHuespedListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHuespedListarActionPerformed
-        //Llamar a listar huesped
-        HuespedListar hl = new HuespedListar();
-        jdpPrincipal.add(hl);
-        hl.setVisible(true);
-    }//GEN-LAST:event_jmiHuespedListarActionPerformed
+    private void jmiHuespedBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHuespedBuscarActionPerformed
+        //Llamar a buscar huesped
+        if(buscarHuesped == null){
+            buscarHuesped = new HuespedBuscar();
+            jdpPrincipal.add(buscarHuesped);
+            buscarHuesped.show();
+        }else{
+            buscarHuesped.dispose();
+            buscarHuesped = new HuespedBuscar();
+            jdpPrincipal.add(buscarHuesped);
+            buscarHuesped.show();
+        } 
+    }//GEN-LAST:event_jmiHuespedBuscarActionPerformed
 
     private void jmiAdministrarTHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAdministrarTHActionPerformed
         //Llamar a administrar tipos de habitacion
@@ -218,7 +236,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar2;
-    public javax.swing.JDesktopPane jdpPrincipal;
+    public static javax.swing.JDesktopPane jdpPrincipal;
     private javax.swing.JMenu jmArchivo;
     private javax.swing.JMenu jmHabitacion;
     private javax.swing.JMenu jmHuesped;
@@ -229,7 +247,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiAdministrarReservas;
     private javax.swing.JMenuItem jmiAdministrarTH;
     private javax.swing.JMenuItem jmiHabitacionListar;
-    private javax.swing.JMenuItem jmiHuespedListar;
+    private javax.swing.JMenuItem jmiHuespedBuscar;
     private javax.swing.JMenuItem jmiReservasListar;
     private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem jmiTHListar;

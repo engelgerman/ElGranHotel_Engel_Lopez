@@ -27,15 +27,15 @@ public class ReservasData {
     public void agregarReserva(Reservas reserva){
              
         try{
-            String sql = "INSERT INTO reservas (CANTIDADDIAS, FECHAENTRADA, FECHASALIDA, IMPORTE, ESTADORESERVA, NUMEROHABITACION, IDHUESPED) VALUES (?, ?, ?, ?, ?, ?, ?);";
+            String sql = "INSERT INTO reservas (CANTIDADPERSONAS, FECHAENTRADA, FECHASALIDA, CANTIDADDIAS, ESTADORESERVA, IDHUESPED, NUMEROHABITACION) VALUES (?, ?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, reserva.getCantidadDias());
+            ps.setInt(1, reserva.getCantidadPersonas());
             ps.setDate(2, Date.valueOf(reserva.getFechaEntrada()));
             ps.setDate(3, Date.valueOf(reserva.getFechaSalida()));
-            ps.setDouble(4, reserva.getImporte());
+            ps.setDouble(4, reserva.getCantidadDias());
             ps.setInt(5, reserva.getEstadoReserva());
-            ps.setInt(6, reserva.getHabitacion());
-            ps.setInt(7, reserva.getHuesped());
+            ps.setInt(6, reserva.getHuesped().getIdHuesped());
+            ps.setInt(7, reserva.getHabitacion().getNumeroHabitacion());
                        
             ps.executeUpdate();
             
@@ -75,16 +75,16 @@ public class ReservasData {
 
     public void modificarReserva(Reservas reserva){
         try {
-            String sql = "UPDATE reservas SET CANTIDADDIAS = ?, FECHAENTRADA = ?, FECHASALIDA = ?, IMPORTE = ?, ESTADORESERVA = ?, NUMEROHABITACION = ?, IDHUESPED = ? WHERE NUMERORESERVA = ?";
+            String sql = "UPDATE reservas SET CANTIDADPERSONAS = ?, FECHAENTRADA = ?, FECHASALIDA = ?, CANTIDADDIAS = ?, ESTADORESERVA = ?, IDHUESPED = ?, NUMEROHABITACION = ? WHERE NUMERORESERVA = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, reserva.getCantidadDias());
+            ps.setInt(1, reserva.getCantidadPersonas());
             ps.setDate(2, Date.valueOf(reserva.getFechaEntrada()));
             ps.setDate(3, Date.valueOf(reserva.getFechaSalida()));
-            ps.setDouble(4, reserva.getImporte());
+            ps.setDouble(4, reserva.getCantidadDias());
             ps.setInt(5, reserva.getEstadoReserva());
-            ps.setInt(6, reserva.getHabitacion());
-            ps.setInt(7, reserva.getHuesped());
+            ps.setInt(6, reserva.getHuesped().getIdHuesped());
+            ps.setInt(7, reserva.getHabitacion().getNumeroHabitacion());
             ps.setInt(8, reserva.getNumeroReserva());
             
             ps.executeUpdate();
@@ -101,6 +101,8 @@ public class ReservasData {
     
     public Reservas buscarReserva(int numeroReserva){
         Reservas reserva = null;
+        HuespedData huespedData = new HuespedData((Conexion)con);
+        HabitacionData habitacionData = new HabitacionData((Conexion)con);
         
         try {
             String sql = "SELECT * FROM reservas WHERE NUMERORESERVA = ?";
@@ -108,16 +110,20 @@ public class ReservasData {
             ps.setInt(1, numeroReserva);
             ResultSet rs = ps.executeQuery();
             
+            
             while (rs.next()){
                 reserva = new Reservas();
+                
                 reserva.setNumeroReserva(rs.getInt(1));
-                reserva.setCantidadDias(rs.getInt(2));
+                reserva.setCantidadPersonas(rs.getInt(2));
                 reserva.setFechaEntrada(rs.getDate(3).toLocalDate());
                 reserva.setFechaSalida(rs.getDate(4).toLocalDate());
-                reserva.setImporte(rs.getDouble(5));
+                reserva.setCantidadDias(rs.getInt(5));
                 reserva.setEstadoReserva(rs.getInt(6));
-                reserva.setHabitacion(rs.getInt(7));
-                reserva.setHuesped(rs.getInt(8));
+                
+                reserva.setHuesped(huespedData.buscarHuesped(rs.getInt(7)));
+                
+                reserva.setHabitacion(habitacionData.buscarHabitacion(rs.getInt(8)));
                                
             }
             ps.close();
@@ -133,7 +139,8 @@ public class ReservasData {
     
     public List<Reservas> listarReservas(){
         List<Reservas> reservas = new ArrayList<>();
-        
+        HuespedData huespedData = new HuespedData((Conexion)con);
+        HabitacionData habitacionData = new HabitacionData((Conexion)con);
         try{
             
         String sql = "SELECT * FROM reservas";
@@ -144,14 +151,16 @@ public class ReservasData {
         
         while (rs.next()){
             reserva = new Reservas();
-            reserva.setNumeroReserva(rs.getInt(1));
-            reserva.setCantidadDias(rs.getInt(2));
-            reserva.setFechaEntrada(rs.getDate(3).toLocalDate());
-            reserva.setFechaSalida(rs.getDate(4).toLocalDate());
-            reserva.setImporte(rs.getDouble(5));
-            reserva.setEstadoReserva(rs.getInt(6));
-            reserva.setHabitacion(rs.getInt(7));
-            reserva.setHuesped(rs.getInt(8));
+                reserva.setNumeroReserva(rs.getInt(1));
+                reserva.setCantidadPersonas(rs.getInt(2));
+                reserva.setFechaEntrada(rs.getDate(3).toLocalDate());
+                reserva.setFechaSalida(rs.getDate(4).toLocalDate());
+                reserva.setCantidadDias(rs.getInt(5));
+                reserva.setEstadoReserva(rs.getInt(6));
+                
+                reserva.setHuesped(huespedData.buscarHuesped(rs.getInt(7)));
+                
+                reserva.setHabitacion(habitacionData.buscarHabitacion(rs.getInt(8)));
             
             reservas.add(reserva);
             

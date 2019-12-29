@@ -1,24 +1,36 @@
 
 package modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class TipoHabitacion {
 
-    private int codigoHabitacion, cantidadPersonas, cantidadCamas;
-    private String tiposCamas;
+    private int codigoHabitacion, cantidadPersonas;
+    private String nombre;
     private double precio;
-    
+    private List<Camas> camas;
+       
 //Constructor
 
     public TipoHabitacion(){
-        
+        camas = new ArrayList<Camas>();
     }
     
-    public TipoHabitacion(int cantidadPersonas, int cantidadCamas, String tiposCamas, double precio){
+    public TipoHabitacion(int codigoHabitacion, int cantidadPersonas, String nombre, double precio){
+        camas = new ArrayList<Camas>();
+        this.codigoHabitacion = codigoHabitacion;
         this.cantidadPersonas = cantidadPersonas;
-        this.cantidadCamas = cantidadCamas;
-        this.tiposCamas = tiposCamas;
+        this.nombre = nombre;
         this.precio = precio;
+    }
+    
+    public TipoHabitacion(int cantidadPersonas, String nombre, double precio){
+        camas = new ArrayList<Camas>();
+        this.cantidadPersonas = cantidadPersonas;
+        this.nombre = nombre;
+        this.precio = precio;   
     }
     
 //Set
@@ -27,15 +39,16 @@ public class TipoHabitacion {
         this.codigoHabitacion = codigoHabitacion;
     }
     
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+    
     public void setCantidadPersonas(int cantidadPersonas){
         this.cantidadPersonas = cantidadPersonas;
     }
     
-    public void setCantidadCamas(int cantidadCamas){
-        this.cantidadCamas = cantidadCamas;
-    }
-    public void setTiposCamas(String tiposCamas){
-        this.tiposCamas = tiposCamas;
+    public void setCamas(List<Camas> camas){
+        this.camas = camas;
     }
     
     public void setPrecio(double precio){
@@ -48,16 +61,16 @@ public class TipoHabitacion {
         return codigoHabitacion;
     }
     
+    public String getNombre(){
+        return nombre;
+    }
+    
     public int getCantidadPersonas(){
         return cantidadPersonas;
     }
     
-    public int getCantidadCamas(){
-        return cantidadCamas;
-    }
-    
-    public String getTiposCamas(){
-        return tiposCamas;
+    public List<Camas> getCamas(){
+        return camas;
     }
     
     public double getPrecio(){

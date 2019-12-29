@@ -30,7 +30,7 @@ public class HabitacionData {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, habitacion.getNumeroHabitacion());
             ps.setInt(2, habitacion.getPiso());
-            ps.setInt(3, habitacion.getTipoHabitacion());
+            ps.setInt(3, habitacion.getTipoHabitacion().getCodigoHabitacion());
             ps.setInt(4, habitacion.getEstadoHabitacion());
 
             
@@ -67,7 +67,7 @@ public class HabitacionData {
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, habitacion.getPiso());
-            ps.setInt(2, habitacion.getTipoHabitacion());
+            ps.setInt(2, habitacion.getTipoHabitacion().getCodigoHabitacion());
             ps.setInt(3, habitacion.getEstadoHabitacion());
             ps.setInt(4, habitacion.getNumeroHabitacion());
             ps.executeUpdate();
@@ -90,13 +90,16 @@ public Habitacion buscarHabitacion(int numeroHabitacion){
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, numeroHabitacion);
             ResultSet rs = ps.executeQuery();
-            
+
+            TipoHabitacionData thd = new TipoHabitacionData((Conexion) con);
+                
             while (rs.next()){
                 habitacion = new Habitacion();
                 habitacion.setNumeroHabitacion(rs.getInt(1));
                 habitacion.setPiso(rs.getInt(2));
-                habitacion.setTipoHabitacion(rs.getInt(3));
                 habitacion.setEstadoHabitacion(rs.getInt(4));
+
+                habitacion.setTipoHabitacion(thd.buscarTipoHabitacion(rs.getInt(3)));
             }
             ps.close();
             
@@ -120,14 +123,16 @@ public List<Habitacion> listarHabitacion(){
         ResultSet rs = ps.executeQuery();
         
         Habitacion habitacion;
-        
+        TipoHabitacionData thd = new TipoHabitacionData((Conexion) con);
+            
         while (rs.next()){
             habitacion = new Habitacion();
             habitacion.setNumeroHabitacion(rs.getInt(1));
             habitacion.setPiso(rs.getInt(2));
-            habitacion.setTipoHabitacion(rs.getInt(3));
             habitacion.setEstadoHabitacion(rs.getInt(4));
-                        
+
+            habitacion.setTipoHabitacion(thd.buscarTipoHabitacion(rs.getInt(3)));
+           
             habitaciones.add(habitacion);
         }
         ps.close();

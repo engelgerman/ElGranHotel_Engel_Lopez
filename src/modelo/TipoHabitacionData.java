@@ -26,12 +26,11 @@ public class TipoHabitacionData {
     public void agregarTipoHabitacion(TipoHabitacion tipoHabitacion){
              
         try{
-            String sql = "INSERT INTO tipohabitacion (CANTIDADPERSONAS, CANTIDADCAMAS, TIPOSCAMAS, PRECIO) VALUES (?, ?, ?, ?);";
+            String sql = "INSERT INTO tipohabitacion (NOMBRE, CANTIDADPERSONAS, PRECIO) VALUES (?, ?, ?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, tipoHabitacion.getCantidadPersonas());
-            ps.setInt(2, tipoHabitacion.getCantidadCamas());
-            ps.setString(3, tipoHabitacion.getTiposCamas());
-            ps.setDouble(4, tipoHabitacion.getPrecio());
+            ps.setString(1, tipoHabitacion.getNombre());
+            ps.setInt(2, tipoHabitacion.getCantidadPersonas());
+            ps.setDouble(3, tipoHabitacion.getPrecio());
                        
             ps.executeUpdate();
             
@@ -71,14 +70,13 @@ public class TipoHabitacionData {
 
     public void modificarTipoHabitacion(TipoHabitacion tipoHabitacion){
         try {
-            String sql = "UPDATE tipohabitacion SET CANTIDADPERSONAS = ?, CANTIDADCAMAS = ?, TIPOSCAMAS = ?, PRECIO = ? WHERE CODIGOHABITACION = ?";
+            String sql = "UPDATE tipohabitacion SET NOMBRE = ?, CANTIDADPERSONAS = ?, PRECIO = ? WHERE CODIGOHABITACION = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, tipoHabitacion.getCantidadPersonas());
-            ps.setInt(2, tipoHabitacion.getCantidadCamas());
-            ps.setString(3, tipoHabitacion.getTiposCamas());
-            ps.setDouble(4, tipoHabitacion.getPrecio());
-            ps.setInt(5, tipoHabitacion.getCodigoHabitacion());
+            ps.setString(1, tipoHabitacion.getNombre());
+            ps.setInt(2, tipoHabitacion.getCantidadPersonas());
+            ps.setDouble(3, tipoHabitacion.getPrecio());
+            ps.setInt(4, tipoHabitacion.getCodigoHabitacion());
             
             ps.executeUpdate();
             
@@ -104,10 +102,9 @@ public class TipoHabitacionData {
             while (rs.next()){
                 tipoHabitacion = new TipoHabitacion();
                 tipoHabitacion.setCodigoHabitacion(rs.getInt(1));
-                tipoHabitacion.setCantidadPersonas(rs.getInt(2));
-                tipoHabitacion.setCantidadCamas(rs.getInt(3));
-                tipoHabitacion.setTiposCamas(rs.getString(4));
-                tipoHabitacion.setPrecio(rs.getDouble(5));
+                tipoHabitacion.setNombre(rs.getString(2));
+                tipoHabitacion.setCantidadPersonas(rs.getInt(3));
+                tipoHabitacion.setPrecio(rs.getDouble(4));
                 
             }
             ps.close();
@@ -136,10 +133,9 @@ public class TipoHabitacionData {
         while (rs.next()){
             tipoHabitacion = new TipoHabitacion();
             tipoHabitacion.setCodigoHabitacion(rs.getInt(1));
-            tipoHabitacion.setCantidadPersonas(rs.getInt(2));
-            tipoHabitacion.setCantidadCamas(rs.getInt(3));
-            tipoHabitacion.setTiposCamas(rs.getString(4));
-            tipoHabitacion.setPrecio(rs.getDouble(5));            
+            tipoHabitacion.setNombre(rs.getString(2));
+            tipoHabitacion.setCantidadPersonas(rs.getInt(3));
+            tipoHabitacion.setPrecio(rs.getDouble(4));            
             
             tipoHabitaciones.add(tipoHabitacion);
         }

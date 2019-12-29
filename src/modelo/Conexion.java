@@ -4,6 +4,7 @@ package modelo;
     import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class Conexion {
  
@@ -28,6 +29,7 @@ public class Conexion {
      }
      catch(SQLException e){
         System.out.println("Error de coneccion");
+        JOptionPane.showMessageDialog(null, "Error de coneccion", "Coneccion", JOptionPane.ERROR_MESSAGE);
     }
      
      return con;
