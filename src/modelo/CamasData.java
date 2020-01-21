@@ -64,6 +64,22 @@ public class CamasData {
             
     }
 
+//Baja agrupada por tipo de habitacion
+    
+    public void borrarCamas(TipoHabitacion th){
+        try {
+            String sql = "DELETE FROM camas WHERE CODIGOHABITACION = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, th.getCodigoHabitacion());
+            ps.executeUpdate();
+            ps.close();
+                           
+        } catch (SQLException ex) {
+            System.out.println("Error al borrar camas");
+        }
+            
+    }
+
 //Modificacion
     
     public void modificarCamas(Camas cama){
@@ -101,7 +117,7 @@ public class CamasData {
                 cama = new Camas();
                 cama.setIdCamas(rs.getInt(1));
                 cama.setCantidad(rs.getInt(2));
-                cama.setcama(rs.getString(3));
+                cama.setCama(rs.getString(3));
                 cama.setCodigoHabitacion(rs.getInt(4));
             }
             ps.close();
@@ -132,7 +148,7 @@ public class CamasData {
             cama = new Camas();
             cama.setIdCamas(rs.getInt(1));
             cama.setCantidad(rs.getInt(2));
-            cama.setcama(rs.getString(3));
+            cama.setCama(rs.getString(3));
             cama.setCodigoHabitacion(rs.getInt(4)); 
                        
             camas.add(cama);
@@ -163,7 +179,7 @@ public class CamasData {
             cama = new Camas();
             cama.setIdCamas(rs.getInt(1));
             cama.setCantidad(rs.getInt(2));
-            cama.setcama(rs.getString(3));
+            cama.setCama(rs.getString(3));
             cama.setCodigoHabitacion(rs.getInt(4)); 
                        
             camas.add(cama);

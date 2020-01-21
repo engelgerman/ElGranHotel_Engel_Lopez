@@ -27,6 +27,7 @@ public class Principal extends javax.swing.JFrame {
         jmTipoHabitacion = new javax.swing.JMenu();
         jmiAdministrarTH = new javax.swing.JMenuItem();
         jmiTHListar = new javax.swing.JMenuItem();
+        jmiCambiarPrecio = new javax.swing.JMenuItem();
         jmHabitacion = new javax.swing.JMenu();
         jmiAdministrarHabitacion = new javax.swing.JMenuItem();
         jmiHabitacionListar = new javax.swing.JMenuItem();
@@ -40,11 +41,11 @@ public class Principal extends javax.swing.JFrame {
         jdpPrincipal.setLayout(jdpPrincipalLayout);
         jdpPrincipalLayout.setHorizontalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 485, Short.MAX_VALUE)
+            .addGap(0, 1024, Short.MAX_VALUE)
         );
         jdpPrincipalLayout.setVerticalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 323, Short.MAX_VALUE)
+            .addGap(0, 643, Short.MAX_VALUE)
         );
 
         jmArchivo.setText("Archivo");
@@ -92,6 +93,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jmTipoHabitacion.add(jmiTHListar);
 
+        jmiCambiarPrecio.setText("Cambiar Precio");
+        jmiCambiarPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCambiarPrecioActionPerformed(evt);
+            }
+        });
+        jmTipoHabitacion.add(jmiCambiarPrecio);
+
         jMenuBar2.add(jmTipoHabitacion);
 
         jmHabitacion.setText("Habitacion");
@@ -117,6 +126,11 @@ public class Principal extends javax.swing.JFrame {
         jmReservas.setText("Reservas");
 
         jmiAdministrarReservas.setText("Administrar");
+        jmiAdministrarReservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAdministrarReservasActionPerformed(evt);
+            }
+        });
         jmReservas.add(jmiAdministrarReservas);
 
         jmiReservasListar.setText("Listar");
@@ -130,11 +144,15 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpPrincipal)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jdpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpPrincipal)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jdpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,6 +161,13 @@ public class Principal extends javax.swing.JFrame {
 
     public static HuespedAdministrar adminHuesped = null;
     public static HuespedBuscar buscarHuesped = null;
+    public static THAdministrar adminTH = null;
+    public static THListar listarTH = null;
+    public static HabitacionAdministrar adminH = null;
+    public static HabitacionTHListar hthListar = null;
+    public static HabitacionListar buscarH = null;
+    public static THCambiarPrecio cambiarPTH = null;
+    public static ReservasAdministrar reservaAdmin = null;
     
     private void jmiAdministrarHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAdministrarHuespedActionPerformed
         //Llamar a administrar huesped
@@ -174,31 +199,88 @@ public class Principal extends javax.swing.JFrame {
 
     private void jmiAdministrarTHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAdministrarTHActionPerformed
         //Llamar a administrar tipos de habitacion
-        THAdministrar tha = new THAdministrar();
-        jdpPrincipal.add(tha);
-        tha.setVisible(true);  
+        if(adminTH == null){
+            adminTH = new THAdministrar();
+            jdpPrincipal.add(adminTH);
+            adminTH.show();
+        }else{
+            adminTH.dispose();
+            adminTH = new THAdministrar();
+            jdpPrincipal.add(adminTH);
+            adminTH.show();
+        } 
     }//GEN-LAST:event_jmiAdministrarTHActionPerformed
 
     private void jmiTHListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiTHListarActionPerformed
         //Llamar a listar tipo de habitacion
-        THListar thl = new THListar();
-        jdpPrincipal.add(thl);
-        thl.setVisible(true);
+        if(listarTH == null){
+            listarTH = new THListar();
+            jdpPrincipal.add(listarTH);
+            listarTH.show();
+        }else{
+            listarTH.dispose();
+            listarTH = new THListar();
+            jdpPrincipal.add(listarTH);
+            listarTH.show();
+        }
     }//GEN-LAST:event_jmiTHListarActionPerformed
 
     private void jmiAdministrarHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAdministrarHabitacionActionPerformed
         //Llamar a administrar habitaciones
-        HabitacionAdministrar ha = new HabitacionAdministrar();
-        jdpPrincipal.add(ha);
-        ha.setVisible(true);
+        if(adminH == null){
+            adminH = new HabitacionAdministrar();
+            jdpPrincipal.add(adminH);
+            adminH.show();
+        }else{
+            adminH.dispose();
+            adminH = new HabitacionAdministrar();
+            jdpPrincipal.add(adminH);
+            adminH.show();
+        }
     }//GEN-LAST:event_jmiAdministrarHabitacionActionPerformed
 
     private void jmiHabitacionListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiHabitacionListarActionPerformed
         //Llamar a listar habitacion
-        HabitacionListar hl = new HabitacionListar();
-        jdpPrincipal.add(hl);
-        hl.setVisible(true);
+        if(cambiarPTH == null){
+            buscarH = new HabitacionListar();
+            jdpPrincipal.add(buscarH);
+            buscarH.show();
+        }else{
+            buscarH.dispose();
+            buscarH = new HabitacionListar();
+            jdpPrincipal.add(buscarH);
+            buscarH.show();
+        }
     }//GEN-LAST:event_jmiHabitacionListarActionPerformed
+
+    private void jmiCambiarPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCambiarPrecioActionPerformed
+        //Llamar a cambiar precio
+        if(cambiarPTH == null){
+            cambiarPTH = new THCambiarPrecio();
+            jdpPrincipal.add(cambiarPTH);
+            cambiarPTH.show();
+        }else{
+            cambiarPTH.dispose();
+            cambiarPTH = new THCambiarPrecio();
+            jdpPrincipal.add(cambiarPTH);
+            cambiarPTH.show();
+        }
+    }//GEN-LAST:event_jmiCambiarPrecioActionPerformed
+
+    private void jmiAdministrarReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAdministrarReservasActionPerformed
+        //Llamar a Reservas
+        if(reservaAdmin == null){
+            reservaAdmin = new ReservasAdministrar();
+            jdpPrincipal.add(reservaAdmin);
+            reservaAdmin.show();
+        }else{
+            reservaAdmin.dispose();
+            reservaAdmin = new ReservasAdministrar();
+            jdpPrincipal.add(reservaAdmin);
+            reservaAdmin.show();
+        }
+        
+    }//GEN-LAST:event_jmiAdministrarReservasActionPerformed
 
  
     
@@ -246,6 +328,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiAdministrarHuesped;
     private javax.swing.JMenuItem jmiAdministrarReservas;
     private javax.swing.JMenuItem jmiAdministrarTH;
+    private javax.swing.JMenuItem jmiCambiarPrecio;
     private javax.swing.JMenuItem jmiHabitacionListar;
     private javax.swing.JMenuItem jmiHuespedBuscar;
     private javax.swing.JMenuItem jmiReservasListar;

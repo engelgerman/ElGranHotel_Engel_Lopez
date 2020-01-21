@@ -32,4 +32,13 @@ public class Validaciones {
         }
     }
     
+    public boolean esPrecio(String numero){
+        try{
+            Double.parseDouble(numero);
+            return true;
+        }catch(NumberFormatException dfe){
+            JOptionPane.showMessageDialog(null, "Debe ingresar precio", "Tipo de Dato", JOptionPane.WARNING_MESSAGE);
+            return false;
+        }
+    }    
 }

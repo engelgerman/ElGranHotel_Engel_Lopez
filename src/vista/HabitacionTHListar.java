@@ -9,15 +9,17 @@ import modelo.CamasData;
 import modelo.Conexion;
 import modelo.TipoHabitacion;
 import modelo.TipoHabitacionData;
+import static vista.Principal.adminH;
 import static vista.Principal.adminTH;
+import static vista.Principal.hthListar;
 import static vista.Principal.jdpPrincipal;
 
 
 
-public class THListar extends javax.swing.JInternalFrame {
+public class HabitacionTHListar extends javax.swing.JInternalFrame {
 
 
-    public THListar() {
+    public HabitacionTHListar() {
         initComponents();
         Conexion con = new Conexion();
         thd = new TipoHabitacionData(con);
@@ -223,42 +225,14 @@ public class THListar extends javax.swing.JInternalFrame {
         //Cargar tipo de habitacion
         int fila = jtTH.getSelectedRow();
         th = thd.buscarTipoHabitacion(Integer.parseInt((String)jtTH.getValueAt(fila, 0)));
+      
+        adminH.th = th;
         
-        List<Camas> camas = new ArrayList<Camas>();
-        camas = cd.buscarCamas(th);
+        adminH.jtfTHabitacion.setText(adminH.th.getCodigoHabitacion()+"");
+        adminH.jtfTHNombre.setText(adminH.th.getNombre());
         
-        if(adminTH == null){
-            adminTH = new THAdministrar();
-            jdpPrincipal.add(adminTH);
-            adminTH.show();
-        }else{
-            adminTH.dispose();
-            adminTH = new THAdministrar();
-            jdpPrincipal.add(adminTH);
-            adminTH.show();
-        } 
-        
-        adminTH.jtfCodigo.setText(th.getCodigoHabitacion()+"");
-        adminTH.jtfNombre.setText(th.getNombre());
-        adminTH.jtfCPersonas.setText(th.getCantidadPersonas()+"");
-        adminTH.jtfPrecio.setText(th.getPrecio()+"");
-        
-        for (int i = adminTH.jtCamas.getRowCount() - 1; i >= 0; i--) {          
-        adminTH.modelo.removeRow(adminTH.jtCamas.getRowCount()-1);
-        }
-        Camas cama = new Camas();        
-        for(int i = 0; i < camas.size(); i++){
-            cama = camas.get(i);
-            adminTH.registro[0] = cama.getCantidad()+"";
-            adminTH.registro[1] = cama.getCama();
-
-
-            adminTH.modelo.addRow(adminTH.registro);
-        }
-
-        adminTH.jtCamas.setModel(adminTH.modelo);
-        
-        
+        hthListar.dispose();
+                
     }//GEN-LAST:event_jbCargarActionPerformed
 
 

@@ -36,7 +36,7 @@ public class Camas {
         this.cantidad = cantidad;
     }
     
-    public void setcama(String cama){
+    public void setCama(String cama){
         this.cama = cama;
     }
     

@@ -121,7 +121,7 @@ public class ReservasData {
                 reserva.setCantidadDias(rs.getInt(5));
                 reserva.setEstadoReserva(rs.getInt(6));
                 
-                reserva.setHuesped(huespedData.buscarHuesped(rs.getInt(7)));
+                reserva.setHuesped(huespedData.buscarHuespedID(rs.getInt(7)));
                 
                 reserva.setHabitacion(habitacionData.buscarHabitacion(rs.getInt(8)));
                                
@@ -158,7 +158,7 @@ public class ReservasData {
                 reserva.setCantidadDias(rs.getInt(5));
                 reserva.setEstadoReserva(rs.getInt(6));
                 
-                reserva.setHuesped(huespedData.buscarHuesped(rs.getInt(7)));
+                reserva.setHuesped(huespedData.buscarHuespedID(rs.getInt(7)));
                 
                 reserva.setHabitacion(habitacionData.buscarHabitacion(rs.getInt(8)));
             

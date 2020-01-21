@@ -87,7 +87,27 @@ public class TipoHabitacionData {
         }
            
     }    
-   
+
+//Modificar precio    
+    
+    public void modificarPrecio(TipoHabitacion tipoHabitacion){
+        try {
+            String sql = "UPDATE tipohabitacion SET PRECIO = ? WHERE CODIGOHABITACION = ?";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDouble(1, tipoHabitacion.getPrecio());
+            ps.setInt(2, tipoHabitacion.getCodigoHabitacion());
+            
+            ps.executeUpdate();
+            
+            ps.close();            
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al modificar tipo de habitacion");
+        }
+           
+    }
+    
 //Buscar
 
     public TipoHabitacion buscarTipoHabitacion(int codigoHabitacion){

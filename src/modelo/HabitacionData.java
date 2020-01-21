@@ -12,13 +12,14 @@ package modelo;
 public class HabitacionData {
     
   private Connection con;
+  private Conexion conexion;
     
 //Constructor
     
     public HabitacionData(Conexion conexion){
 
-            con = conexion.getConexion();
-
+        con = conexion.getConexion();
+        this.conexion = conexion;      
     }
     
 //Alta 
@@ -91,15 +92,15 @@ public Habitacion buscarHabitacion(int numeroHabitacion){
             ps.setInt(1, numeroHabitacion);
             ResultSet rs = ps.executeQuery();
 
-            TipoHabitacionData thd = new TipoHabitacionData((Conexion) con);
+            TipoHabitacionData thd = new TipoHabitacionData(conexion);
                 
             while (rs.next()){
                 habitacion = new Habitacion();
                 habitacion.setNumeroHabitacion(rs.getInt(1));
                 habitacion.setPiso(rs.getInt(2));
-                habitacion.setEstadoHabitacion(rs.getInt(4));
+                habitacion.setEstadoHabitacion(rs.getInt(3));
 
-                habitacion.setTipoHabitacion(thd.buscarTipoHabitacion(rs.getInt(3)));
+                habitacion.setTipoHabitacion(thd.buscarTipoHabitacion(rs.getInt(4)));
             }
             ps.close();
             
@@ -123,15 +124,50 @@ public List<Habitacion> listarHabitacion(){
         ResultSet rs = ps.executeQuery();
         
         Habitacion habitacion;
-        TipoHabitacionData thd = new TipoHabitacionData((Conexion) con);
+        TipoHabitacionData thd = new TipoHabitacionData(conexion);
             
         while (rs.next()){
             habitacion = new Habitacion();
             habitacion.setNumeroHabitacion(rs.getInt(1));
             habitacion.setPiso(rs.getInt(2));
-            habitacion.setEstadoHabitacion(rs.getInt(4));
+            habitacion.setEstadoHabitacion(rs.getInt(3));
 
-            habitacion.setTipoHabitacion(thd.buscarTipoHabitacion(rs.getInt(3)));
+            habitacion.setTipoHabitacion(thd.buscarTipoHabitacion(rs.getInt(4)));
+           
+            habitaciones.add(habitacion);
+        }
+        ps.close();
+        
+        
+        }
+        catch (SQLException e){
+            System.out.println("Error al listar habitaciones");
+        }
+        return habitaciones;
+    }
+
+//Buscar por tipo de habitacion
+
+public List<Habitacion> buscarPorTH(TipoHabitacion tipoHabitacion){
+        List<Habitacion> habitaciones = new ArrayList<Habitacion>();
+        
+        try{
+            
+        String sql = "SELECT * FROM habitacion WHERE CODIGOHABITACION = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, tipoHabitacion.getCodigoHabitacion());
+        ResultSet rs = ps.executeQuery();
+        
+        Habitacion habitacion;
+        TipoHabitacionData thd = new TipoHabitacionData(conexion);
+            
+        while (rs.next()){
+            habitacion = new Habitacion();
+            habitacion.setNumeroHabitacion(rs.getInt(1));
+            habitacion.setPiso(rs.getInt(2));
+            habitacion.setEstadoHabitacion(rs.getInt(3));
+
+            habitacion.setTipoHabitacion(thd.buscarTipoHabitacion(rs.getInt(4)));
            
             habitaciones.add(habitacion);
         }
