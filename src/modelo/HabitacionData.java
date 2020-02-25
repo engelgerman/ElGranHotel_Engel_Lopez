@@ -180,5 +180,40 @@ public List<Habitacion> buscarPorTH(TipoHabitacion tipoHabitacion){
         }
         return habitaciones;
     }
+
+//Buscar por estado
+
+public List<Habitacion> buscarEstado(int estado){
+        List<Habitacion> habitaciones = new ArrayList<Habitacion>();
+        
+        try{
+            
+        String sql = "SELECT * FROM habitacion WHERE ESTADOHABITACION = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, estado);
+        ResultSet rs = ps.executeQuery();
+        
+        Habitacion habitacion;
+        TipoHabitacionData thd = new TipoHabitacionData(conexion);
+            
+        while (rs.next()){
+            habitacion = new Habitacion();
+            habitacion.setNumeroHabitacion(rs.getInt(1));
+            habitacion.setPiso(rs.getInt(2));
+            habitacion.setEstadoHabitacion(rs.getInt(3));
+
+            habitacion.setTipoHabitacion(thd.buscarTipoHabitacion(rs.getInt(4)));
+           
+            habitaciones.add(habitacion);
+        }
+        ps.close();
+        
+        
+        }
+        catch (SQLException e){
+            System.out.println("Error al listar habitaciones");
+        }
+        return habitaciones;
+    }
    
 }

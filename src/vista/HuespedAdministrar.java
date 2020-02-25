@@ -179,14 +179,7 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
     boolean block = true;
     
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        //Limpiar
-        jtfID.setText("");
-        jtfNombre.setText("");
-        jtfDNI.setText("");
-        jtfDomicilio.setText("");
-        jtfCorreo.setText("");
-        jtfCelular.setText("");
-        block = true;
+        limpiar();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
@@ -209,19 +202,20 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
         if(block){
             Validaciones valid = new Validaciones();
             if(valid.esDNI(jtfDNI.getText())){
-            huesped = new Huesped();
-            huesped.setNombre(jtfNombre.getText());
-            huesped.setDni(Integer.parseInt(jtfDNI.getText()));
-            huesped.setDomicilio(jtfDomicilio.getText());
-            huesped.setCorreo(jtfCorreo.getText());
-            huesped.setCelular(jtfCelular.getText());
-        
-            hd.agregarHuesped(huesped);
+                huesped = new Huesped();
+                huesped.setNombre(jtfNombre.getText());
+                huesped.setDni(Integer.parseInt(jtfDNI.getText()));
+                huesped.setDomicilio(jtfDomicilio.getText());
+                huesped.setCorreo(jtfCorreo.getText());
+                huesped.setCelular(jtfCelular.getText());
 
-            jtfID.setText(huesped.getIdHuesped()+"");
-            }
-            block = false;
-        }    
+                hd.agregarHuesped(huesped);
+
+                jtfID.setText(huesped.getIdHuesped()+"");
+                block = false;
+            }else limpiar();
+            
+        }else limpiar();    
     }//GEN-LAST:event_jbCrearActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
@@ -248,6 +242,7 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
         
     }//GEN-LAST:event_jbBuscarActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -268,4 +263,14 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
     public javax.swing.JTextField jtfID;
     public javax.swing.JTextField jtfNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiar() {
+        jtfID.setText("");
+        jtfNombre.setText("");
+        jtfDNI.setText("");
+        jtfDomicilio.setText("");
+        jtfCorreo.setText("");
+        jtfCelular.setText("");
+        block = true;    
+    }
 }

@@ -108,11 +108,10 @@ public class TipoHabitacionData {
            
     }
     
-//Buscar
+//Buscar por codigo de habitacion
 
     public TipoHabitacion buscarTipoHabitacion(int codigoHabitacion){
         TipoHabitacion tipoHabitacion = null;
-        
         try {
             String sql = "SELECT * FROM tipohabitacion WHERE CODIGOHABITACION = ?";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -120,11 +119,13 @@ public class TipoHabitacionData {
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()){
+
                 tipoHabitacion = new TipoHabitacion();
                 tipoHabitacion.setCodigoHabitacion(rs.getInt(1));
                 tipoHabitacion.setNombre(rs.getString(2));
                 tipoHabitacion.setCantidadPersonas(rs.getInt(3));
                 tipoHabitacion.setPrecio(rs.getDouble(4));
+                
                 
             }
             ps.close();
@@ -137,6 +138,71 @@ public class TipoHabitacionData {
         
     }    
     
+//Buscar por camntidad de personas
+
+    public List<TipoHabitacion> buscarCPersonas(int cPersonas){
+        List<TipoHabitacion> tipoHabitaciones = new ArrayList<>();
+        
+        
+        try {
+            String sql = "SELECT * FROM tipohabitacion WHERE CANTIDADPERSONAS = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, cPersonas);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                TipoHabitacion tipoHabitacion = null;
+                tipoHabitacion = new TipoHabitacion();
+                tipoHabitacion.setCodigoHabitacion(rs.getInt(1));
+                tipoHabitacion.setNombre(rs.getString(2));
+                tipoHabitacion.setCantidadPersonas(rs.getInt(3));
+                tipoHabitacion.setPrecio(rs.getDouble(4));
+                
+                tipoHabitaciones.add(tipoHabitacion);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar tipo de habitacion");
+        }
+        
+        return tipoHabitaciones;
+        
+    }   
+    
+//Buscar por precio
+
+    public List<TipoHabitacion> buscarPorPrecio(double precio1, double precio2){
+        List<TipoHabitacion> tipoHabitaciones = new ArrayList<>();
+        
+        
+        try {
+            String sql = "SELECT * FROM tipohabitacion WHERE PRECIO >= ? AND PRECIO <= ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDouble(1, precio1);
+            ps.setDouble(2, precio2);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()){
+                TipoHabitacion tipoHabitacion = null;
+                tipoHabitacion = new TipoHabitacion();
+                tipoHabitacion.setCodigoHabitacion(rs.getInt(1));
+                tipoHabitacion.setNombre(rs.getString(2));
+                tipoHabitacion.setCantidadPersonas(rs.getInt(3));
+                tipoHabitacion.setPrecio(rs.getDouble(4));
+                
+                tipoHabitaciones.add(tipoHabitacion);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error al buscar tipo de habitacion");
+        }
+        
+        return tipoHabitaciones;
+        
+    }    
+
 //Listar    
     
     public List<TipoHabitacion> listarTipoHabitacion(){

@@ -19,11 +19,12 @@ public class Principal extends javax.swing.JFrame {
 
         jdpPrincipal = new javax.swing.JDesktopPane();
         jMenuBar2 = new javax.swing.JMenuBar();
-        jmArchivo = new javax.swing.JMenu();
-        jmiSalir = new javax.swing.JMenuItem();
+        jmSalir = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jmHuesped = new javax.swing.JMenu();
         jmiAdministrarHuesped = new javax.swing.JMenuItem();
         jmiHuespedBuscar = new javax.swing.JMenuItem();
+        jmiInforme = new javax.swing.JMenuItem();
         jmTipoHabitacion = new javax.swing.JMenu();
         jmiAdministrarTH = new javax.swing.JMenuItem();
         jmiTHListar = new javax.swing.JMenuItem();
@@ -34,26 +35,36 @@ public class Principal extends javax.swing.JFrame {
         jmReservas = new javax.swing.JMenu();
         jmiAdministrarReservas = new javax.swing.JMenuItem();
         jmiReservasListar = new javax.swing.JMenuItem();
+        jmiCICO = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jdpPrincipal.setPreferredSize(new java.awt.Dimension(1147, 500));
 
         javax.swing.GroupLayout jdpPrincipalLayout = new javax.swing.GroupLayout(jdpPrincipal);
         jdpPrincipal.setLayout(jdpPrincipalLayout);
         jdpPrincipalLayout.setHorizontalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1024, Short.MAX_VALUE)
+            .addGap(0, 1127, Short.MAX_VALUE)
         );
         jdpPrincipalLayout.setVerticalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 643, Short.MAX_VALUE)
+            .addGroup(jdpPrincipalLayout.createSequentialGroup()
+                .addGap(0, Short.MAX_VALUE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jmArchivo.setText("Archivo");
+        jmSalir.setText("Archivo");
 
-        jmiSalir.setText("Salir");
-        jmArchivo.add(jmiSalir);
+        jMenuItem1.setText("Salir");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jmSalir.add(jMenuItem1);
 
-        jMenuBar2.add(jmArchivo);
+        jMenuBar2.add(jmSalir);
 
         jmHuesped.setText("Huesped");
 
@@ -72,6 +83,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jmHuesped.add(jmiHuespedBuscar);
+
+        jmiInforme.setText("Informe");
+        jmiInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiInformeActionPerformed(evt);
+            }
+        });
+        jmHuesped.add(jmiInforme);
 
         jMenuBar2.add(jmHuesped);
 
@@ -134,7 +153,20 @@ public class Principal extends javax.swing.JFrame {
         jmReservas.add(jmiAdministrarReservas);
 
         jmiReservasListar.setText("Listar");
+        jmiReservasListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiReservasListarActionPerformed(evt);
+            }
+        });
         jmReservas.add(jmiReservasListar);
+
+        jmiCICO.setText("Check In Check Out");
+        jmiCICO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCICOActionPerformed(evt);
+            }
+        });
+        jmReservas.add(jmiCICO);
 
         jMenuBar2.add(jmReservas);
 
@@ -145,14 +177,16 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jdpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jdpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1127, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jdpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jdpPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -168,6 +202,12 @@ public class Principal extends javax.swing.JFrame {
     public static HabitacionListar buscarH = null;
     public static THCambiarPrecio cambiarPTH = null;
     public static ReservasAdministrar reservaAdmin = null;
+    public static ReservaHuespedBuscar resBusHuesped = null;
+    public static ReservaHabitacionListar reservaHL = null;
+    public static ReservasListar resListar = null;
+    public static CICOReservaListar cicoResListar = null;
+    public static CheckInCheckOut cico = null;
+    public static HuespedInforme hInforme = null;
     
     private void jmiAdministrarHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAdministrarHuespedActionPerformed
         //Llamar a administrar huesped
@@ -282,6 +322,52 @@ public class Principal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jmiAdministrarReservasActionPerformed
 
+    private void jmiReservasListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReservasListarActionPerformed
+        //Llamar a reserva listar
+        if(resListar == null){
+            resListar = new ReservasListar();
+            jdpPrincipal.add(resListar);
+            resListar.show();
+        }else{
+            resListar.dispose();
+            resListar = new ReservasListar();
+            jdpPrincipal.add(resListar);
+            resListar.show();
+        }
+    }//GEN-LAST:event_jmiReservasListarActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+         this.dispose();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jmiCICOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCICOActionPerformed
+        //Check In Check Out
+        if(cico == null){
+            cico = new CheckInCheckOut();
+            jdpPrincipal.add(cico);
+            cico.show();
+        }else{
+            cico.dispose();
+            cico = new CheckInCheckOut();
+            jdpPrincipal.add(cico);
+            cico.show();
+        } 
+    }//GEN-LAST:event_jmiCICOActionPerformed
+
+    private void jmiInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInformeActionPerformed
+        //Informe
+        if(hInforme == null){
+            hInforme = new HuespedInforme();
+            jdpPrincipal.add(hInforme);
+            hInforme.show();
+        }else{
+            hInforme.dispose();
+            hInforme = new HuespedInforme();
+            jdpPrincipal.add(hInforme);
+            hInforme.show();
+        } 
+    }//GEN-LAST:event_jmiInformeActionPerformed
+
  
     
     public static void main(String args[]) {
@@ -318,21 +404,23 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     public static javax.swing.JDesktopPane jdpPrincipal;
-    private javax.swing.JMenu jmArchivo;
     private javax.swing.JMenu jmHabitacion;
     private javax.swing.JMenu jmHuesped;
     private javax.swing.JMenu jmReservas;
+    private javax.swing.JMenu jmSalir;
     private javax.swing.JMenu jmTipoHabitacion;
     private javax.swing.JMenuItem jmiAdministrarHabitacion;
     private javax.swing.JMenuItem jmiAdministrarHuesped;
     private javax.swing.JMenuItem jmiAdministrarReservas;
     private javax.swing.JMenuItem jmiAdministrarTH;
+    private javax.swing.JMenuItem jmiCICO;
     private javax.swing.JMenuItem jmiCambiarPrecio;
     private javax.swing.JMenuItem jmiHabitacionListar;
     private javax.swing.JMenuItem jmiHuespedBuscar;
+    private javax.swing.JMenuItem jmiInforme;
     private javax.swing.JMenuItem jmiReservasListar;
-    private javax.swing.JMenuItem jmiSalir;
     private javax.swing.JMenuItem jmiTHListar;
     // End of variables declaration//GEN-END:variables
 }
