@@ -577,13 +577,9 @@ public class ReservasListar extends javax.swing.JInternalFrame {
         try{
             String fe = jtfFEntrada.getText();
             fEntrada = LocalDate.parse(fe, formatter);
-            
-            if(fEntrada.isAfter(hoy)||fEntrada.isEqual(hoy)){
-                jtfFEntrada.setText(fEntrada.format(formatter2));
-            }else{
-                jtfFEntrada.setText("");
-                JOptionPane.showMessageDialog(null, "No puede ingresar fechas anteriores a hoy", "Fecha", JOptionPane.WARNING_MESSAGE);
-            }
+
+            jtfFEntrada.setText(fEntrada.format(formatter2));
+
         }catch(DateTimeParseException e){
             JOptionPane.showMessageDialog(null, "Ingrese una fecha correcta", "Fecha", JOptionPane.WARNING_MESSAGE);
         }
@@ -595,11 +591,11 @@ public class ReservasListar extends javax.swing.JInternalFrame {
             String fe = jtfFSalida.getText();
             fSalida = LocalDate.parse(fe, formatter);
             
-            if(fSalida.isAfter(hoy)||fSalida.isEqual(hoy)){
+            if(fSalida.isAfter(fEntrada)){
                 jtfFSalida.setText(fSalida.format(formatter2));
             }else{
                 jtfFSalida.setText("");
-                JOptionPane.showMessageDialog(null, "No puede ingresar fechas anteriores a hoy", "Fecha", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No puede ingresar fechas anteriores a fecha de entrada", "Fecha", JOptionPane.WARNING_MESSAGE);
             }
         }catch(DateTimeParseException e){
             JOptionPane.showMessageDialog(null, "Ingrese una fecha correcta", "Fecha", JOptionPane.WARNING_MESSAGE);

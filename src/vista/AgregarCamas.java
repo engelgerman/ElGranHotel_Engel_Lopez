@@ -27,6 +27,8 @@ public class AgregarCamas extends javax.swing.JInternalFrame {
         jcbCamas = new javax.swing.JComboBox<>();
         jtfCantidad = new javax.swing.JTextField();
         jbAgregar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jlPersonas = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Seleccione Camas");
@@ -36,6 +38,11 @@ public class AgregarCamas extends javax.swing.JInternalFrame {
         jLabel2.setText("Tipo de Cama");
 
         jcbCamas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCamas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbCamasItemStateChanged(evt);
+            }
+        });
 
         jbAgregar.setText("Agregar");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -44,23 +51,30 @@ public class AgregarCamas extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setText("Personas:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcbCamas, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbAgregar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jtfCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbCamas, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlPersonas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbAgregar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -73,14 +87,19 @@ public class AgregarCamas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jcbCamas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jbAgregar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbAgregar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jlPersonas)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     Validaciones val = new Validaciones();
+    int[] personas = {1, 2, 2, 2};
     
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         //Agregar camas a tipo de habitacion
@@ -102,12 +121,21 @@ public class AgregarCamas extends javax.swing.JInternalFrame {
         }        
     }//GEN-LAST:event_jbAgregarActionPerformed
 
+    private void jcbCamasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCamasItemStateChanged
+        //
+        if(jcbCamas.getSelectedIndex() > 0){
+        jlPersonas.setText(personas[jcbCamas.getSelectedIndex()-1]+"");
+        }
+    }//GEN-LAST:event_jcbCamasItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JComboBox<String> jcbCamas;
+    private javax.swing.JLabel jlPersonas;
     private javax.swing.JTextField jtfCantidad;
     // End of variables declaration//GEN-END:variables
 }

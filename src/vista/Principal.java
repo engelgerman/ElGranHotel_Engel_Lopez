@@ -2,8 +2,15 @@
 package vista;
 
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import modelo.Conexion;
+import modelo.Huesped;
+import modelo.HuespedData;
+import modelo.UsuarioData;
+import modelo.Usuarios;
 
 
 public class Principal extends javax.swing.JFrame {
@@ -49,9 +56,7 @@ public class Principal extends javax.swing.JFrame {
         );
         jdpPrincipalLayout.setVerticalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jdpPrincipalLayout.createSequentialGroup()
-                .addGap(0, Short.MAX_VALUE, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 690, Short.MAX_VALUE)
         );
 
         jmSalir.setText("Archivo");
@@ -395,11 +400,43 @@ public class Principal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new Principal().setVisible(true);
+//            }
+//        });
+
+       Conexion con = new Conexion(); 
+       
+       HuespedData hd = new HuespedData(con);
+       Huesped huesped1 = hd.buscarHuespedID(1);
+
+        Usuarios us1 = new Usuarios();
+        us1.setApellido("sa0");
+        us1.setNombre("juao");
+        us1.setMail("jj@gml.com");
+        us1.setHuesped(huesped1);
+        
+        UsuarioData ud = new UsuarioData(con);
+        
+        ud.agregarUsuarios(us1);
+        
+        List<Usuarios> usuarios = new ArrayList<Usuarios>();
+        usuarios = ud.listarUsuarios();
+        
+        for(int i = 0; i<usuarios.size(); i++){
+            Usuarios us = new Usuarios();
+            us = usuarios.get(i);
+            System.out.println(us.getID()+", "+ us.getApellido()+", "+us.getNombre()+", "+us.getMail()+", "+us.getHuesped().getIdHuesped()+"\n");
+            
+        }
+        
+
+
+
+
+
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

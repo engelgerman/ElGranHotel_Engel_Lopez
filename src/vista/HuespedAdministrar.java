@@ -4,6 +4,7 @@ package vista;
 import modelo.Conexion;
 import modelo.Huesped;
 import modelo.HuespedData;
+import static vista.Principal.buscarHuesped;
 import static vista.Principal.jdpPrincipal;
 
 public class HuespedAdministrar extends javax.swing.JInternalFrame {
@@ -234,12 +235,16 @@ public class HuespedAdministrar extends javax.swing.JInternalFrame {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
         //Buscar
-        if(Principal.buscarHuesped == null){
-            Principal.buscarHuesped = new HuespedBuscar();
+        if(buscarHuesped == null){
+            buscarHuesped = new HuespedBuscar();
+            jdpPrincipal.add(buscarHuesped);
+            buscarHuesped.show();
+        }else{
+            buscarHuesped.dispose();
+            buscarHuesped = new HuespedBuscar();
+            jdpPrincipal.add(buscarHuesped);
+            buscarHuesped.show();
         }
-        jdpPrincipal.add(Principal.buscarHuesped);
-        Principal.buscarHuesped.setVisible(true);
-        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     

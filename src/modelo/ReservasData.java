@@ -54,7 +54,7 @@ public class ReservasData {
 
         }
         catch(SQLException ex){
-            System.out.println("Error al agregar reserva");
+            System.out.println("Error al agregar reserva"+ ex);
         }
     }
     
